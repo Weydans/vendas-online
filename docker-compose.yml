@@ -1,0 +1,30 @@
+version: "3.9"
+
+networks:
+  lan-webapp:
+    driver: bridge
+
+services:
+  
+  webserver:
+    container_name: webserver
+    build:
+      context: ./webserver
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    networks:
+      - lan-webapp
+    depends_on:
+      - webapp
+
+  webapp:
+    container_name: webapp
+    build:
+      context: ./webapp
+    restart: unless-stopped
+    volumes:
+      - ./webapp/:/app/
+    command: sh -c "npm i && npm run dev -- --host --port 3000"
+    networks:
+      - lan-webapp
