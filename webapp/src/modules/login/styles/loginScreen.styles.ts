@@ -22,6 +22,7 @@ export const ContainerLogin = styled.div`
   max-width: 460px;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
