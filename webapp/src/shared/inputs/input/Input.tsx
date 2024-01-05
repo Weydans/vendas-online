@@ -4,11 +4,12 @@ import { InputBox, InputLabel } from './input.styles';
 
 interface InputProps extends InputPropsAntd {
   label?: string;
+  margin?: string;
 }
 
-const Input = ({ label, ...props }: InputProps) => {
+const Input = ({ label, margin, ...props }: InputProps) => {
   return (
-    <InputBox>
+    <InputBox style={margin ? { margin } : { margin: '10px 0' }}>
       {label && <InputLabel>{label}</InputLabel>}
       <InputAntd {...props} />
     </InputBox>

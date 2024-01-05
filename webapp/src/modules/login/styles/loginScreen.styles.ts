@@ -28,7 +28,7 @@ export const ContainerLogin = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 10%;
+  padding: 0 6%;
 `;
 
 export const LogoImage = styled.img`
