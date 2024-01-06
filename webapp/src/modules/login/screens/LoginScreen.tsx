@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-import Button from '../../../shared/buttons/button/Button';
-import SVGLogo from '../../../shared/icons/SVGLogo';
-import Input from '../../../shared/inputs/input/Input';
+import Button from '../../../shared/components/buttons/button/Button';
+import SVGLogo from '../../../shared/components/icons/SVGLogo';
+import Input from '../../../shared/components/inputs/input/Input';
 import {
   BackgroundImage,
   ContainerLogin,
