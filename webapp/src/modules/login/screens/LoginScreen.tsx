@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Button from '../../../shared/components/buttons/button/Button';
 import SVGLogo from '../../../shared/components/icons/SVGLogo';
 import Input from '../../../shared/components/inputs/input/Input';
+import { useAccessToken } from '../../../shared/hooks/useGlobalContext';
 import useRequests from '../../../shared/hooks/useRequests';
 import {
   BackgroundImage,
@@ -12,6 +13,7 @@ import {
 } from '../styles/loginScreen.styles';
 
 const LoginScreen = () => {
+  const { accessToken, setAccessToken } = useAccessToken();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { loading, requestPost } = useRequests();
@@ -25,6 +27,7 @@ const LoginScreen = () => {
   };
 
   const handleLogin = () => {
+    setAccessToken('Access Token');
     requestPost('http://localhost:8000/api/auth', {
       email,
       password,
@@ -37,7 +40,7 @@ const LoginScreen = () => {
       <ContainerLogin>
         <SVGLogo width="180px" />
         <LoginTitle level={2} type="secondary">
-          LOGIN
+          LOGIN ({accessToken})
         </LoginTitle>
         <Input label="USUÁRIO" onChange={handleEmail} value={email} />
         <Input type="password" label="SENHA" onChange={handlePassword} value={password} />

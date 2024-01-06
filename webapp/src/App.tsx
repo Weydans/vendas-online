@@ -3,6 +3,7 @@ import type { RouteObject } from 'react-router';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { loginRoutes } from './modules/login/routes';
+import { GlobalProvider } from './shared/hooks/useGlobalContext';
 
 const mainRoutes: RouteObject[] = [
   {
@@ -14,7 +15,11 @@ const mainRoutes: RouteObject[] = [
 const router: Router = createBrowserRouter([...mainRoutes, ...loginRoutes]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <GlobalProvider>
+      <RouterProvider router={router} />
+    </GlobalProvider>
+  );
 }
 
 export default App;
