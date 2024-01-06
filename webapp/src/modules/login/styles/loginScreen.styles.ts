@@ -31,8 +31,4 @@ export const ContainerLogin = styled.div`
   padding: 0 6%;
 `;
 
-export const LogoImage = styled.img`
-  max-height: 120px;
-`;
-
 export const LoginTitle = styled(Title)``;
