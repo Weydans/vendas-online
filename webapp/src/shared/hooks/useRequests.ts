@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useState } from 'react';
 
+import HTTPCLient from '../service/HTTP/HTTPClient';
 import { useNotification } from './useNotification';
 
 const useRequests = () => {
@@ -10,10 +10,7 @@ const useRequests = () => {
   const requestGet = async (url: string) => {
     setLoading(true);
 
-    const response = await axios({
-      method: 'get',
-      url: url,
-    })
+    const response = await HTTPCLient.get(url)
       .then((response) => {
         alert('Login realizado com sucesso');
         return response;
@@ -30,18 +27,13 @@ const useRequests = () => {
   const requestPost = async (url: string, body: unknown) => {
     setLoading(true);
 
-    const response = await axios({
-      method: 'post',
-      url: url,
-      data: body,
-    })
+    const response = await HTTPCLient.post(url, body)
       .then((response) => {
         setNotification('Login realizado com sucesso', 'success');
         return response;
       })
-      .catch((response) => {
-        setNotification('E-mail e/ou senha inválidos', 'error');
-        return response;
+      .catch((error) => {
+        setNotification(error.message, 'error');
       });
 
     setLoading(false);
