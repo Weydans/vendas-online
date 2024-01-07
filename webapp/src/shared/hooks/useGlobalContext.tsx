@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 interface GlobalData {
   accessToken?: string;
@@ -9,13 +9,15 @@ interface GlobalContextProps {
   setGlobalData: (globalData: GlobalData) => void;
 }
 
-export const globalContext = createContext({} as GlobalContextProps);
+export const globalContext: React.Context<GlobalContextProps> = createContext(
+  {} as GlobalContextProps,
+);
 
 interface GlobalProviderProps {
   children: React.ReactNode;
 }
 
-export const GlobalProvider = ({ children }: GlobalProviderProps) => {
+export const GlobalProvider = ({ children }: GlobalProviderProps): JSX.Element => {
   const [globalData, setGlobalData] = useState<GlobalData>({});
 
   return (
@@ -23,20 +25,4 @@ export const GlobalProvider = ({ children }: GlobalProviderProps) => {
       {children}
     </globalContext.Provider>
   );
-};
-
-export const useAccessToken = () => {
-  const { globalData, setGlobalData } = useContext(globalContext);
-
-  const setAccessToken = (accessToken: string) => {
-    setGlobalData({
-      ...globalData,
-      accessToken,
-    });
-  };
-
-  return {
-    accessToken: globalData?.accessToken,
-    setAccessToken,
-  };
 };
