@@ -3,7 +3,7 @@ import type { RouteObject } from 'react-router';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { loginRoutes } from './modules/login/routes';
-import { GlobalProvider } from './shared/hooks/useGlobalContext';
+import { useNotification } from './shared/hooks/useNotification';
 
 const mainRoutes: RouteObject[] = [
   {
@@ -15,10 +15,13 @@ const mainRoutes: RouteObject[] = [
 const router: Router = createBrowserRouter([...mainRoutes, ...loginRoutes]);
 
 function App() {
+  const { contextHolder } = useNotification();
+
   return (
-    <GlobalProvider>
+    <>
+      {contextHolder}
       <RouterProvider router={router} />
-    </GlobalProvider>
+    </>
   );
 }
 

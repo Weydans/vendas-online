@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
 
+import { useNotification } from './useNotification';
+
 const useRequests = () => {
   const [loading, setLoading] = useState(false);
+  const { setNotification } = useNotification();
 
   const requestGet = async (url: string) => {
     setLoading(true);
@@ -33,11 +36,11 @@ const useRequests = () => {
       data: body,
     })
       .then((response) => {
-        alert('Login realizado com sucesso');
+        setNotification('Login realizado com sucesso', 'success');
         return response;
       })
       .catch((response) => {
-        alert('E-mail e/ou senha inválidos');
+        setNotification('E-mail e/ou senha inválidos', 'error');
         return response;
       });
 

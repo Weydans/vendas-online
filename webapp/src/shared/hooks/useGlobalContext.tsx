@@ -1,7 +1,15 @@
 import { createContext, useState } from 'react';
 
+export type NotificationType = 'success' | 'info' | 'warning' | 'error';
+
+interface Notification {
+  message: string;
+  type: NotificationType;
+}
+
 interface GlobalData {
   accessToken?: string;
+  notification: Notification;
 }
 
 interface GlobalContextProps {
@@ -18,7 +26,7 @@ interface GlobalProviderProps {
 }
 
 export const GlobalProvider = ({ children }: GlobalProviderProps): JSX.Element => {
-  const [globalData, setGlobalData] = useState<GlobalData>({});
+  const [globalData, setGlobalData] = useState<GlobalData>({} as GlobalData);
 
   return (
     <globalContext.Provider value={{ globalData, setGlobalData }}>
